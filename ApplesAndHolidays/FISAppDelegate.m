@@ -11,10 +11,71 @@
     return YES;
 }
 
-/**
- 
- * Implement your methods here.
- 
- */
+- (NSArray *)pickApplesFromFruits:(NSArray *)fruits {
+    NSPredicate *applePredicate = [NSPredicate predicateWithFormat:@"SELF IN %@", @[@"apple"]];
+    NSArray *apples = [fruits filteredArrayUsingPredicate:applePredicate];
+    return apples;
+}
+
+
+- (NSArray *)holidaysInSeason:(NSString *)season
+                   inDatabase:(NSDictionary *)database {
+    
+    NSPredicate *holidayPredicate = [NSPredicate predicateWithFormat:@"holiday CONTAINS[cd] 'day'"];
+    NSMutableArray *holidays = [[NSMutableArray alloc]init];
+    NSLog(@"%@", database);
+    for (NSDictionary *holiday in database) {
+        NSArray *holidayArray = [database[season] filteredArrayUsingPredicate:holidayPredicate];
+        [holidays addObject:database[holiday]];
+        NSLog(@"HOLIDAY ARRAY %@", holidayArray);
+    }
+    NSLog(@"%@", holidays);
+    return holidays;
+    
+}
+
+- (NSArray *)suppliesInHoliday:(NSString *)holiday
+                      inSeason:(NSString *)season
+                    inDatabase:(NSDictionary *)database {
+    
+    return nil;
+    
+}
+
+- (BOOL)holiday:(NSString *)holiday
+     isInSeason:(NSString *)season
+     inDatabase:(NSDictionary *)database {
+    
+    return nil;
+    
+}
+
+
+- (BOOL)supply:(NSString *)supply
+   isInHoliday:(NSString *)holiday
+      inSeason:(NSString *)season
+    inDatabase:(NSDictionary *)database {
+    
+    
+    return nil;
+    
+}
+
+
+- (NSDictionary *)addHoliday:(NSString *)holiday
+                    toSeason:(NSString *)season
+                  inDatabase:(NSDictionary *)database {
+    
+    return nil;
+    
+}
+
+
+- (NSDictionary *)addSupply:(NSString *)supply
+                  toHoliday:(NSString *)holiday
+                   inSeason:(NSString *)season
+                 inDatabase:(NSDictionary *)database {
+    return nil;
+}
 
 @end
