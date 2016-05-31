@@ -12,15 +12,21 @@
 }
 
 - (NSArray *)pickApplesFromFruits:(NSArray *)fruits {
+    
     NSPredicate *applePredicate = [NSPredicate predicateWithFormat:@"SELF IN %@", @[@"apple"]];
+    
     NSArray *apples = [fruits filteredArrayUsingPredicate:applePredicate];
+    
     return apples;
+    
 }
 
 
 - (NSArray *)holidaysInSeason:(NSString *)season
                    inDatabase:(NSDictionary *)database {
+    
     NSArray *keys = [database[season] allKeys];
+    
     return keys;
     
 }
@@ -28,8 +34,11 @@
 - (NSArray *)suppliesInHoliday:(NSString *)holiday
                       inSeason:(NSString *)season
                     inDatabase:(NSDictionary *)database {
+    
     NSMutableArray *holidays = [[NSMutableArray alloc]init];
+    
     [holidays addObject:database[season][holiday]];
+    
     return holidays[0];
     
 }
@@ -38,7 +47,15 @@
      isInSeason:(NSString *)season
      inDatabase:(NSDictionary *)database {
     
-    return nil;
+    NSArray *keys = [database[season] allKeys];
+    
+    if ([keys containsObject:holiday]) {
+        
+        return YES;
+        
+    }
+    
+    return NO;
     
 }
 
@@ -48,8 +65,13 @@
       inSeason:(NSString *)season
     inDatabase:(NSDictionary *)database {
     
+    if ([database[season][holiday] containsObject:supply]) {
+        
+        return YES;
+        
+    }
     
-    return nil;
+    return NO;
     
 }
 
@@ -58,8 +80,11 @@
                     toSeason:(NSString *)season
                   inDatabase:(NSDictionary *)database {
     
-    return nil;
+    NSMutableArray *holidayArray = [[NSMutableArray alloc] init];
     
+    [database[season] setValue:holidayArray forKey:holiday];
+    
+    return database;
 }
 
 
@@ -67,7 +92,9 @@
                   toHoliday:(NSString *)holiday
                    inSeason:(NSString *)season
                  inDatabase:(NSDictionary *)database {
-    return nil;
+    
+    [database[season][holiday] addObject:supply];
+    return database;
 }
 
 @end
